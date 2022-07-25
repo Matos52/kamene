@@ -67,12 +67,6 @@ public class ConsoleUI {
         String choice = readLine();
 
         switch (choice) {
-            case "New":
-                break;
-            case "Exit":
-                System.out.printf("Cas hrania: %d%n", KameneMain.getInstance().getPlayingSeconds());
-                System.out.println("Koniec hry");
-                System.exit(0);
             case "W":
                 goUp();
                 break;
@@ -85,6 +79,10 @@ public class ConsoleUI {
             case "D":
                 goRight();
                 break;
+            case "Exit":
+                System.out.printf("Cas hrania: %d%n", KameneMain.getInstance().getPlayingSeconds());
+                System.out.println("Koniec hry");
+                System.exit(0);
         }
     }
 
@@ -114,11 +112,27 @@ public class ConsoleUI {
     }
 
     public void goUp() {
-
+        for (int r = 0; r < field.getRowCount(); r++) {
+            for (int c = 0; c < field.getColumnCount(); c++) {
+                if (field.getTiles(r, c) instanceof EmptyTile) {
+                    if (r + 1 < field.getRowCount()) {
+                        field.setTiles(field.getTiles(r, c), field.getTiles(r, c + 1));
+                    }
+                }
+            }
+        }
     }
 
     public void goDown() {
-
+        for (int r = 0; r < field.getRowCount(); r++) {
+            for (int c = 0; c < field.getColumnCount(); c++) {
+                if (field.getTiles(r, c) instanceof EmptyTile) {
+                    if (r + 1 < field.getRowCount()) {
+                        field.setTiles(field.getTiles(r, c), field.getTiles(r, c - 1));
+                    }
+                }
+            }
+        }
     }
 }
 
